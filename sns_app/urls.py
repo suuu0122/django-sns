@@ -1,8 +1,10 @@
-from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
+
+from . import views
 
 
 
+app_name = "sns_app"
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('signup/', views.signup, name="signup"),
 ]
