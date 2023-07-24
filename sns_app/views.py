@@ -1,7 +1,10 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render
+
+from .models import Tweet
 
 
 
@@ -29,3 +32,9 @@ def signin(request):
         else:
             return render(request, "sns_app/signin.html", {"error": "not logged in"})
     return render(request, "sns_app/signin.html", {"error": "get method"})
+
+
+
+def list_view(request):
+    tweets = Tweet.objects.all()
+    return render(request, "sns_app/list.html", {"tweets": tweets})
