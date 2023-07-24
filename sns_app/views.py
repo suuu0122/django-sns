@@ -35,6 +35,7 @@ def signin(request):
 
 
 
+@login_required
 def list_view(request):
     tweets = Tweet.objects.all()
     return render(request, "sns_app/list.html", {"tweets": tweets})
