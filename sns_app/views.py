@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Tweet
 
@@ -46,3 +46,10 @@ def list_view(request):
 def logout_view(request):
     logout(request)
     return redirect("sns_app:signin")
+
+
+
+@login_required
+def detail_view(request, pk):
+    tweet = get_object_or_404(Tweet, pk=pk)
+    return render(request, "sns_app/detail.html", {"tweet": tweet})
