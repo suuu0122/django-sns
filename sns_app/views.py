@@ -1,8 +1,8 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .models import Tweet
 
@@ -28,10 +28,10 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return render(request, "sns_app/signin.html", {"error": "logged in"})
+            return redirect("sns_app:list")
         else:
-            return render(request, "sns_app/signin.html", {"error": "not logged in"})
-    return render(request, "sns_app/signin.html", {"error": "get method"})
+            return render(request, "sns_app/signin.html", {"error": "ユーザ名とパスワード名が正しくありません"})
+    return render(request, "sns_app/signin.html", {})
 
 
 
@@ -39,3 +39,10 @@ def signin(request):
 def list_view(request):
     tweets = Tweet.objects.all()
     return render(request, "sns_app/list.html", {"tweets": tweets})
+
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("sns_app:signin")
