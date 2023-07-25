@@ -57,8 +57,22 @@ def detail_view(request, pk):
 
 
 @login_required
-def good(rquest, pk):
+def good_btn(rquest, pk):
     tweet = get_object_or_404(Tweet, pk=pk)
     tweet.good += 1
     tweet.save()
     return redirect("sns_app:list")
+
+
+
+@login_required
+def read_btn(request, pk):
+    tweet = get_object_or_404(Tweet, pk=pk)
+    username = request.user.get_username()
+    if username in tweet.read_text:
+        return redirect("sns_app:list")
+    else:
+        tweet.read += 1
+        tweet.read_text = tweet.read_text + ' ' + username
+        tweet.save()
+        return redirect("sns_app:list")

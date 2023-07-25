@@ -11,5 +11,6 @@ urlpatterns = [
     path('list/', views.list_view, name="list"),
     path('logout/', views.logout_view, name="logout"),
     path('detail/<int:pk>', views.detail_view, name="detail"),
-    path('good/<int:pk>', views.good, name="good"),
+    path('good/<int:pk>', views.good_btn, name="good"),
+    path('read/<int:pk>', views.read_btn, name="read")
 ]
