@@ -12,6 +12,7 @@
 {% block content %}
 
 <div class="container">
+	<a href="{% url 'sns_app:create' %}" class="btn btn-primary mb-3">新規作成</a>
 	{% for tweet in tweets %}
 		<div class="alert alert-success" role="alert">
 			<p>タイトル: <a href="{% url 'sns_app:detail' tweet.pk %}">{{ tweet.title }}</a></p>
