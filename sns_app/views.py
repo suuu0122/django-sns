@@ -76,3 +76,23 @@ def read_btn(request, pk):
         tweet.read_text = tweet.read_text + ' ' + username
         tweet.save()
         return redirect("sns_app:list")
+
+
+
+@login_required
+def create_view(request):
+    if request.method == "POST":
+        title       = request.POST["title"]
+        content     = request.POST["content"]
+        contributor = request.user.get_username()
+        sns_image   = request.FILES["sns_image"]
+        good        = 0
+        read        = 0
+        read_text   = contributor
+        print(0)
+        
+        tweet = Tweet.objects.create(title=title, content=content, contributor=contributor, \
+                                     sns_image=sns_image, good=good, read=read, read_text=read_text)
+        print(0)
+        return redirect("sns_app:list")
+    return render(request, "sns_app/create.html")

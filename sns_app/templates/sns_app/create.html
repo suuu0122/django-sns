@@ -1,0 +1,21 @@
+{% extends "sns_app/base.html" %}
+
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="d-flex flex-column align-items-center my-4">
+		<p>タイトル</p>
+		<input class="mb-4" type="text" name="title">
+		<p>内容</p>
+		<input class="mb-4" type="text" name="content">
+		<p>投稿画像</p>
+		<input class="mb-4" type="file" name="sns_image">
+		<div>
+			<input type="submit" value="create">
+		</div>
+	</div>
+</form>
+
+{% endblock content %}
