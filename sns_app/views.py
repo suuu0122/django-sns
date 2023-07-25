@@ -53,3 +53,12 @@ def logout_view(request):
 def detail_view(request, pk):
     tweet = get_object_or_404(Tweet, pk=pk)
     return render(request, "sns_app/detail.html", {"tweet": tweet})
+
+
+
+@login_required
+def good(rquest, pk):
+    tweet = get_object_or_404(Tweet, pk=pk)
+    tweet.good += 1
+    tweet.save()
+    return redirect("sns_app:list")
