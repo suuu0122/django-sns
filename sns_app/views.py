@@ -14,7 +14,7 @@ def signup(request):
         password = request.POST["password"]
         try:
             user = User.objects.create_user(username, '', password)
-            return render(request, "sns_app/signup.html")
+            return redirect("sns_app:signin")
         except IntegrityError:
             return render(request, "sns_app/signup.html", {"error": "このユーザはすでに登録されています"})
     return render(request, "sns_app/signup.html")
